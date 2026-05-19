@@ -1,22 +1,30 @@
-#movies {
-    margin: 0;
-    padding: 0;
+body {
+  background-color: lightblue;
 }
 
-#movies > li {
-    list-style: none;
-    background-color: #eee;
-    margin: 5px;
-    padding: 20px;
-    box-shadow: 0 0 5px #999;
+.movie-app {
+  background: white;
+  padding: 30px;
+  max-width: 800px;
+  border-radius: 5px;
 }
 
-#movies > li > img {
-    float: right;
-    height: 25px;
-    margin-left: 5px;
+.movie-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
 }
 
-.delete-movie-icon {
-    cursor: pointer;
+.stars {
+  margin-right: 15px;
 }
+
+.delete-btn {
+  cursor: pointer;
+}
+
+.btn {
+ box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25); 
+ transition: 0.2s ease;
+ }

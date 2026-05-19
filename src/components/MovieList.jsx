@@ -1,13 +1,19 @@
-import Movie from './Movie'
+
+import Movie from "./Movie";
 
 const MovieList = ({ movies, onDeleteMovie }) => {
     return (
-        <ul id="movies">
-            {movies.map((movie, index) => (
-                <Movie key={index} movie={movie} onDeleteMovie={onDeleteMovie} />
+        <ul className="list-group">
+            {movies.map((movie) => (
+                <Movie
+                    key={movie.id}
+                    movie={movie}
+                    onDeleteMovie={onDeleteMovie}
+                />
             ))}
         </ul>
-    )
-}
+    );
+};
 
-export default MovieList
+export default MovieList;
+

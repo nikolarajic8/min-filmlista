@@ -1,41 +1,69 @@
-const AddMovieForm = ({ onAddMovie }) => {
+import { useState } from "react";
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        
-        const titel = e.target.titel.value
-        const betyg = e.target.betyg.value
+function AddMovieForm({ addMovie }) {
+  const [title, setTitle] = useState("");
+  const [grade, setGrade] = useState("");
 
-        if (!titel || betyg == "0") {
-            alert("Fyll i både titel och betyg!")
-            return
-        }
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-        onAddMovie({ titel, betyg })
-        e.target.reset()
+    // Validering
+    if (title.trim() === "" || grade === "") {
+      alert("Du måste ange titel och betyg!");
+      return;
     }
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <fieldset>
-                <legend>Lägg till en film</legend>
-                <label>Titel:</label>
-                <input type="text" name="titel" className="form-control" placeholder="Titel här..." />
-                
-                <label>Betyg:</label>
-                <select name="betyg" className="form-control">
-                    <option value="0">Välj betyg...</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+    const newMovie = {
+      id: Date.now(),
+      title: title,
+      grade: Number(grade),
+    };
 
-                <button type="submit" className="btn btn-success mt-3">Spara film</button>
-            </fieldset>
-        </form>
-    )
+    addMovie(newMovie);
+
+    // Återställ formulär
+    setTitle("");
+    setGrade("");
+  };
+
+  return (
+    <div className="mt-4">
+      <h2>Lägg till en film</h2>
+
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className="form-label">Titel:</label>
+
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Titel här..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Betyg:</label>
+
+          <select
+            className="form-select"
+            value={grade}
+            onChange={(e) => setGrade(e.target.value)}
+          >
+            <option value="">Välj betyg här...</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+
+        <button className="btn btn-success">Spara film</button>
+      </form>
+    </div>
+  );
 }
 
-export default AddMovieForm
+export default AddMovieForm;
